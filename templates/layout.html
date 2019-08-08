@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>       
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+            
+        <!-- Bootstrap CSS and Custom css -->
+        {{ bootstrap.load_css() }}
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+           
+           
+        {% if title %}
+            <title>Community Helper - {{ title }}</title>
+        {% else %}
+            <title>Comminity Helper</title>
+        {% endif %}
+
+    </head>
+    <body>
+        <header id="head">
+            <!-- begin navigation -->
+            {% from 'bootstrap/nav.html' import render_nav_item %}
+            <nav class="navbar navbar-expand-md navbar-light bg-light border">
+                <a class="navbar-brand" href="#">comelper</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav mr-auto mt-2">
+                        {{ render_nav_item('index', 'Home', use_li=True) }}
+                    </ul>
+                    <ul class="navbar-nav mt-2">
+                        {{ render_nav_item('login', 'Login', use_li=True) }}
+                        {{ render_nav_item('signup', 'Register', use_li=True) }}
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- alert messages -->
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, messages in messages %}
+                    <div class="alert alert-{{ category }} border text-center square-edges" role="alert">
+                        {{ messages }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <!-- begin main page -->
+        <main role="main" class="container .p-5">
+          
+        <!-- page content -->
+        {% block main %}{% endblock main %}
+        </main>
+        <!-- end main page -->
+
+        <!-- begin footer -->
+        <footer class="container-fluid">
+
+        </footer>
+        <!-- end footer -->
+
+        
+        <!-- Javascript -->
+        {{ bootstrap.load_js() }}
+       
+    </body>
+</html>
